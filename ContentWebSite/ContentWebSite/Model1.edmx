@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XDG_Content_Management_WebSiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'XDG_Content_Management_WebSite.dbo.contents_Of_WebSite' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="contents_Of_WebSite">
+          <Key>
+            <PropertyRef Name="cont_id" />
+            <PropertyRef Name="Pg_id" />
+          </Key>
+          <Property Name="cont_id" Type="int" Nullable="false" />
+          <Property Name="Pg_id" Type="int" Nullable="false" />
+          <Property Name="number_Content" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'XDG_Content_Management_WebSite.dbo.Contents_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Contents_view">
+          <Key>
+            <PropertyRef Name="content_id" />
+          </Key>
+          <Property Name="content_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="content_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'XDG_Content_Management_WebSite.dbo.pages_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pages_view">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="web_id" Type="int" />
+          <Property Name="name_Of_Page" Type="nvarchar" MaxLength="50" />
+          <Property Name="page_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'XDG_Content_Management_WebSite.dbo.Users_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Users_view">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_mail" Type="nvarchar" MaxLength="50" />
+          <Property Name="passWord" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'XDG_Content_Management_WebSite.dbo.WebSite_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WebSite_view">
+          <Key>
+            <PropertyRef Name="web_id" />
+          </Key>
+          <Property Name="web_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <Function Name="Add_Content" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="content_Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Add_Contents_Of_Site" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Content_Id" Type="int" Mode="In" />
+          <Parameter Name="Page_id" Type="int" Mode="In" />
+          <Parameter Name="number_Content" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Add_Pages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="webSite_Id" Type="int" Mode="In" />
+          <Parameter Name="Page_Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Add_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="user_mail" Type="nvarchar" Mode="In" />
+          <Parameter Name="passWord" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="create_WebSite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="webName" Type="nvarchar" Mode="In" />
+          <Parameter Name="url" Type="nvarchar" Mode="In" />
+          <Parameter Name="user_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="XDG_Content_Management_WebSiteModelStoreContainer">
+          <EntitySet Name="contents_Of_WebSite" EntityType="Self.contents_Of_WebSite" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[contents_Of_WebSite].[cont_id] AS [cont_id], 
+[contents_Of_WebSite].[Pg_id] AS [Pg_id], 
+[contents_Of_WebSite].[number_Content] AS [number_Content]
+FROM [dbo].[contents_Of_WebSite] AS [contents_Of_WebSite]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Contents_view" EntityType="Self.Contents_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Contents_view].[content_id] AS [content_id], 
+[Contents_view].[content_name] AS [content_name]
+FROM [dbo].[Contents_view] AS [Contents_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pages_view" EntityType="Self.pages_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[pages_view].[web_id] AS [web_id], 
+[pages_view].[name_Of_Page] AS [name_Of_Page], 
+[pages_view].[page_id] AS [page_id]
+FROM [dbo].[pages_view] AS [pages_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Users_view" EntityType="Self.Users_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Users_view].[user_Id] AS [user_Id], 
+[Users_view].[user_Name] AS [user_Name], 
+[Users_view].[user_mail] AS [user_mail], 
+[Users_view].[passWord] AS [passWord]
+FROM [dbo].[Users_view] AS [Users_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WebSite_view" EntityType="Self.WebSite_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[WebSite_view].[web_id] AS [web_id], 
+[WebSite_view].[url] AS [url], 
+[WebSite_view].[name] AS [name], 
+[WebSite_view].[user_id] AS [user_id]
+FROM [dbo].[WebSite_view] AS [WebSite_view]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XDG_Content_Management_WebSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users_view">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="XDG_Content_Management_WebSiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users_view" EntityType="Self.Users_view" />
+          <FunctionImport Name="Add_User">
+            <Parameter Name="user_Name" Mode="In" Type="String" />
+            <Parameter Name="user_mail" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(XDG_Content_Management_WebSiteModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(XDG_Content_Management_WebSiteModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="WebSite_view" EntityType="XDG_Content_Management_WebSiteModel.WebSite_view" />
+          <FunctionImport Name="create_WebSite">
+            <Parameter Name="webName" Mode="In" Type="String" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="contents_Of_WebSite" EntityType="XDG_Content_Management_WebSiteModel.contents_Of_WebSite" />
+          <EntitySet Name="Contents_view" EntityType="XDG_Content_Management_WebSiteModel.Contents_view" />
+          <EntitySet Name="pages_view" EntityType="XDG_Content_Management_WebSiteModel.pages_view" />
+          <FunctionImport Name="Add_Contents_Of_Site">
+            <Parameter Name="Content_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Page_id" Mode="In" Type="Int32" />
+            <Parameter Name="number_Content" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Pages">
+            <Parameter Name="webSite_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Page_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Content">
+            <Parameter Name="content_Name" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="WebSite_view">
+          <Key>
+            <PropertyRef Name="web_id" />
+          </Key>
+          <Property Name="web_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="contents_Of_WebSite">
+          <Key>
+            <PropertyRef Name="cont_id" />
+            <PropertyRef Name="Pg_id" />
+          </Key>
+          <Property Name="cont_id" Type="Int32" Nullable="false" />
+          <Property Name="Pg_id" Type="Int32" Nullable="false" />
+          <Property Name="number_Content" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Contents_view">
+          <Key>
+            <PropertyRef Name="content_id" />
+          </Key>
+          <Property Name="content_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="content_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="pages_view">
+          <Key>
+            <PropertyRef Name="page_id" />
+          </Key>
+          <Property Name="web_id" Type="Int32" />
+          <Property Name="name_Of_Page" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="page_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XDG_Content_Management_WebSiteModelStoreContainer" CdmEntityContainer="XDG_Content_Management_WebSiteEntities">
+          <EntitySetMapping Name="Users_view">
+            <EntityTypeMapping TypeName="XDG_Content_Management_WebSiteModel.Users_view">
+              <MappingFragment StoreEntitySet="Users_view">
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="user_Name" ColumnName="user_Name" />
+                <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_User" FunctionName="XDG_Content_Management_WebSiteModel.Store.Add_User" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="XDG_Content_Management_WebSiteModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="XDG_Content_Management_WebSiteModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="XDG_Content_Management_WebSiteModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="WebSite_view">
+            <EntityTypeMapping TypeName="XDG_Content_Management_WebSiteModel.WebSite_view">
+              <MappingFragment StoreEntitySet="WebSite_view">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="web_id" ColumnName="web_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="create_WebSite" FunctionName="XDG_Content_Management_WebSiteModel.Store.create_WebSite" />
+          <EntitySetMapping Name="contents_Of_WebSite">
+            <EntityTypeMapping TypeName="XDG_Content_Management_WebSiteModel.contents_Of_WebSite">
+              <MappingFragment StoreEntitySet="contents_Of_WebSite">
+                <ScalarProperty Name="number_Content" ColumnName="number_Content" />
+                <ScalarProperty Name="Pg_id" ColumnName="Pg_id" />
+                <ScalarProperty Name="cont_id" ColumnName="cont_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contents_view">
+            <EntityTypeMapping TypeName="XDG_Content_Management_WebSiteModel.Contents_view">
+              <MappingFragment StoreEntitySet="Contents_view">
+                <ScalarProperty Name="content_name" ColumnName="content_name" />
+                <ScalarProperty Name="content_id" ColumnName="content_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pages_view">
+            <EntityTypeMapping TypeName="XDG_Content_Management_WebSiteModel.pages_view">
+              <MappingFragment StoreEntitySet="pages_view">
+                <ScalarProperty Name="page_id" ColumnName="page_id" />
+                <ScalarProperty Name="name_Of_Page" ColumnName="name_Of_Page" />
+                <ScalarProperty Name="web_id" ColumnName="web_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_Contents_Of_Site" FunctionName="XDG_Content_Management_WebSiteModel.Store.Add_Contents_Of_Site" />
+          <FunctionImportMapping FunctionImportName="Add_Pages" FunctionName="XDG_Content_Management_WebSiteModel.Store.Add_Pages" />
+          <FunctionImportMapping FunctionImportName="Add_Content" FunctionName="XDG_Content_Management_WebSiteModel.Store.Add_Content" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
